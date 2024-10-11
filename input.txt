@@ -1,0 +1,145 @@
+defines $R 5* ``valid define
+includes stdio.h ``valid include
+includes stdio ``invalid include
+defines $S 5* ``valid define
+defines $q 5 ``invalid define
+defines $Q 5 ``invalid define
+``ok Done
+INT FUNC !abc { $a , $b }
+$a -as 2 -mul 3 -pl 5:
+$b -as $a -or 3:
+PRINTS $a , $b:
+RETURN $a:
+FUNCEND
+FUNC MAIN 
+INT $rs , INT $nw: ``valid variable
+FLOAT $qw: ``valid variable
+CHAR $wq: ``valid variable
+INT $rs: ``invalid variable as declared twice
+FLOAT $qw -as -6.2: ``invalid variable as declared twice
+CHAR $rs: ``invalid variable as declared twice
+INT $abc -as 5: ``valid variable with assigment
+FLOAT $pqr -as 2.5: ``valid variable with assigment
+INT $aw -as $abc -pl 2: ``valid variable with assigment and previous variable
+FLOAT $aq -as $pqr -pl 5.3: ``valid variable with assigment and previous variable
+INT $abc -as -6: ``invalid variable as declared twice
+INT $add -as $ab -pl 2: ``invalid as $ab is not declared before
+CHAR $ccc -as 'a': ``valid variable
+CONST ?Q -as 6.5 , CONST ?Z -as 2: ``invalid constant
+INT $iii -as 5 , INT $ii -as $iii -pl 2: ``valid recursive variable
+INT $i -as $non -pl 2: ``invalid variable as $non is not declared before
+CHAR $ch -as 'c' , CHAR $chh -as $ch -pl 2 , CHAR $chhh: ``recursive character variables
+INT $iv -as $abc -mul 5 , INT $ivv -as $abc -div 5 , INT $ivvv -as $abc -mod 2 , INT $ivvvv -as $abc -exp 2:
+FLOAT $pqrs -as $pqr -mul 2.5 , FLOAT $ff -as $pqr -div 2.5 , FLOAT $fff -as $pqr -mn 2.5:
+$rst -as  2 -pl 5: ``invalid as the variabled is not defined earlier
+$nw -as 2 -mul 3 -pl 5 , $rs -as 5 -pl 2 -mul 5:
+PRINTS $rs , $nw: ``valid print
+$rs -as $abcd -pl 2 -mn 5: ``invalid as the variabled is not defined earlier
+``if block
+IF { 2 -eq 2 }
+$a -as 2 -pl 5 -mul 5 -mul 2 -div 2: 
+$p -as 3 -div 5 -pl ( 2 -mn 6 ):
+IFF
+``if-elif-else block
+IF { $abc -lt 1 }  
+CONST ?Q -as 5:
+ELIF { $abc -lt 1 -and $abc -lt 10 }
+PRINTS $qw:
+ELSE
+PRINTS $abc:
+IFF
+``if-else block
+IF { 1 -eq 2 }
+CONST ?Q -as 5:
+ELSE
+PRINTS $abc:
+IFF
+``nested if block
+IF { $abc -ge 7 }
+CONST ?Q -as 5:
+ELSE
+PRINTS $abc:
+IF { 3 -gt 2 }
+``iccha
+ELSE
+``khushi
+IFF
+IFF
+PRINTS $abc:
+$abc -as $abc -gt 1:
+$abc -as $abc -lt 1:
+$abc -as $abc -eq 1 -or 2 -eq 2:
+INT $i -as 3:
+-inc $i:
+-dec $i:
+PRINTS $i:
+FOR { INT $fo -as 2: $fo -le 7: -inc $fo: }
+PRINTS $abc:
+FOREND
+FOR { $fo -as 2: $abc -ge 7: $fo -as $fo -pl 2: }
+PRINTS $abc:
+FOREND
+WHILE { $abc -le 7: }
+PRINTS $abc:
+-inc $abc:
+WHILEEND
+WHILE { $abc -ge 7: }
+PRINTS $abc:
+-inc $abc:
+WHILEEND
+WHILE { $abc -le 7: }
+PRINTS $abc:
+WHILEEND
+FOR { $fo -as 2: $abc -ge 7: $fo -as $fo -pl 2: }
+PRINTS $abc:
+WHILE { $abc -ge 7: }
+PRINTS $abc:
+-inc $abc:
+WHILEEND
+FOREND
+FOR $i -in 5 ... 10
+PRINTS $i:
+FOREND
+FOR $i -in 10 ... 5
+PRINTS $i:
+FOREND
+FOR $i -in 5.5 ... 10
+PRINTS $i:
+FOREND
+~deya
+FOR
+girl
+~
+INT FUNC !abc { $a , $b }
+$a -as 2 -mul 3 -pl 5:
+$b -as $a -or 3:
+PRINTS $a , $b:
+RETURN $a:
+FUNCEND
+FLOAT FUNC !abc { $a , $b }
+$a -as 2 -mul 3 -pl 5:
+$b -as $a -or 3:
+PRINTS $a , $b:
+RETURN $a:
+FUNCEND
+VOID FUNC !pqr { $a , $b }
+$a -as 2 -mul 3 -pl 5:
+$b -as $a -or 3:
+PRINTS $a , $b:
+RETURN $a:
+FUNCEND
+VOID FUNC !xyz { $a , $b }
+$aa -as 2 -mul 3 -pl 5:
+$b -as $ac -or 3:
+PRINTS $a , $b:
+RETURN NILL:
+FUNCEND
+INT *arr { } -as ( 1 , 2 , 3 , 4 ): ``valid array
+FLOAT *farr { } -as ( 1.1 , 2.2 , 3.3 ): ``valid array
+FLOAT *avr { } -as ( 1 , 2 , 3 , 4 ):
+INT *arw { } -as ( 1.1 , 2.2 , 3.3 ):
+CHAR *arrw { } -as ( 'a' , 'b' , 'c' ): ``valid array
+INT *faka { }: ``valid array
+INT *arr { } -as ( 6 , 2 , 0 , 9 ):
+MAINEND
+
